@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
-
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class SmallText extends StatelessWidget {
   Color? color;
@@ -20,7 +19,7 @@ class SmallText extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        // fontFamily: 'Roboto',
+        fontFamily: 'Roboto',
         color: color,
         fontSize: size,
         height: height,

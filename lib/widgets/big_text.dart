@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
-
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class BigText extends StatelessWidget {
   Color? color;
@@ -24,7 +23,7 @@ class BigText extends StatelessWidget {
       maxLines: 1,
       overflow: overflow,
       style: TextStyle(
-        // fontFamily: 'Roboto',
+        fontFamily: 'Roboto',
         color: color,
         fontSize: size,
         fontWeight: FontWeight.w400,

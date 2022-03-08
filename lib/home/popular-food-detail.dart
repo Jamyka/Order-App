@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:order/widgets/app_column.dart';
 import 'package:order/widgets/app_icon.dart';
-import 'package:order/widgets/expandable-text-widget.dart';
+import 'package:order/widgets/expandable_text_widget.dart';
 
 class PopularFoodDetail extends StatelessWidget {
   //final String text;
