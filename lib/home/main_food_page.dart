@@ -51,14 +51,15 @@ class _MainFoodPageState extends State<MainFoodPage> {
                     ],
                   )
                 ]),
-              Center(
-                child: Container(
-                  width: Dimensions.width45,
-                  height: Dimensions.height45,
-                  child: Icon(Icons.search,color: Colors.white,size: Dimensions.iconSize24,),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(Dimensions.raduis15),
-                    color: AppColors.mainColor
+                Center(
+                  child: Container(
+                    width: Dimensions.width45,
+                    height: Dimensions.height45,
+                    child: Icon(Icons.search,color: Colors.white,size: Dimensions.iconSize24,),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(Dimensions.raduis15),
+                      color: AppColors.mainColor
+                    ),
                   ),
                 ),
               ]),
