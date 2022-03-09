@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get.dart';
 import 'home/main_food_page.dart';
 
 void main() {
@@ -11,8 +12,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    // get Material App will get the context when the app get initialized
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      // title is the parameter name
       title: 'Order-App',
       theme: ThemeData(
         primarySwatch: Colors.orange,

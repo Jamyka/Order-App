@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:order/utils/dimensions.dart';
 
 class BigText extends StatelessWidget {
   Color? color;
@@ -8,7 +9,7 @@ class BigText extends StatelessWidget {
   // You can't use color as a default it must contain parameter 
   BigText({ Key? key, this.color = const Color(0xFF332d2b), 
       required this.text,
-      this.size=20,
+      this.size=0,
       // TextOverflow.ellipsis "will display dots if the text is bigger than its container width"
       this.overflow=TextOverflow.ellipsis
     }) : super(key: key);
@@ -20,9 +21,9 @@ class BigText extends StatelessWidget {
       maxLines: 1,
       overflow: overflow,
       style: TextStyle(
-        // fontFamily: 'Roboto',
+        fontFamily: 'Roboto',
         color: color,
-        fontSize: size,
+        fontSize: size==0?Dimensions.font20:size,
         fontWeight: FontWeight.w400,
       ),
     );

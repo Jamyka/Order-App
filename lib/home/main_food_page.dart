@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:order/utils/colors.dart';
+import 'package:order/utils/dimensions.dart';
 import 'package:order/widgets/big_text.dart';
 import 'package:order/widgets/small_text.dart';
 
@@ -15,13 +16,20 @@ class MainFoodPage extends StatefulWidget {
 class _MainFoodPageState extends State<MainFoodPage> {
   @override
   Widget build(BuildContext context) {
+    // to know dimension of the current screen
+    print("Current Height is "+MediaQuery.of(context).size.height.toString());
+    print("Current pageView is "+Dimensions.pageView.toString());
+    print("Current pageViewContainer is "+Dimensions.pageViewContainer.toString());
+    print("Current pageViewTextContainer is "+Dimensions.pageViewTextContainer.toString());
+    print("Current font is "+Dimensions.font20.toString());
     return Scaffold(
       body: Column(
         children: [
+          // Showing The Header
           Container(
             // Use EdgeInsets class for spaces
-            margin: EdgeInsets.only(top: 45,bottom: 15),
-            padding: EdgeInsets.only(right: 20,left: 20),
+            margin: EdgeInsets.only(top: Dimensions.height45,bottom: Dimensions.height15),
+            padding: EdgeInsets.only(right: Dimensions.width20,left: Dimensions.width20),
           // Rows' default be verticaly centered
           child: Row(
             // "mainAxisAlignment" Create a space between row's children as much 
@@ -40,18 +48,23 @@ class _MainFoodPageState extends State<MainFoodPage> {
                 ]),
               Center(
                 child: Container(
-                  width: 45,
-                  height: 45,
-                  child: Icon(Icons.search,color: Colors.white,),
+                  width: Dimensions.width45,
+                  height: Dimensions.height45,
+                  child: Icon(Icons.search,color: Colors.white,size: Dimensions.iconSize24,),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(Dimensions.raduis15),
                     color: AppColors.mainColor
                   ),
                 ),
               ),
             ]),
         ),
-        FoodPageBody(),
+          // Showing The Body
+          Expanded(
+            child: SingleChildScrollView(
+              child: FoodPageBody(),
+            ),
+          ),
       ]),
     );
   }
