@@ -1,6 +1,8 @@
 // import 'dart:ffi';
 
 import 'package:dots_indicator/dots_indicator.dart';
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:order/utils/colors.dart';
@@ -10,7 +12,7 @@ import 'package:order/widgets/icon_and_text_widget.dart';
 import 'package:order/widgets/small_text.dart';
 
 class FoodPageBody extends StatefulWidget {
-  const FoodPageBody({ Key? key }) : super(key: key);
+  const FoodPageBody({Key? key}) : super(key: key);
 
   @override
   State<FoodPageBody> createState() => _FoodPageBodyState();

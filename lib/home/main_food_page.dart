@@ -7,7 +7,7 @@ import 'package:order/widgets/small_text.dart';
 import 'food_page_body.dart';
 
 class MainFoodPage extends StatefulWidget {
-  const MainFoodPage({ Key? key }) : super(key: key);
+  const MainFoodPage({Key? key}) : super(key: key);
 
   @override
   State<MainFoodPage> createState() => _MainFoodPageState();
@@ -32,17 +32,22 @@ class _MainFoodPageState extends State<MainFoodPage> {
             padding: EdgeInsets.only(right: Dimensions.width20,left: Dimensions.width20),
           // Rows' default be verticaly centered
           child: Row(
-            // "mainAxisAlignment" Create a space between row's children as much 
-            // as it can on at the most left and one at the most right
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                children: [
-                  BigText(text: "Bangladesh",color: AppColors.mainColor,),
+              // "mainAxisAlignment" Create a space between row's children as much
+              // as it can on at the most left and one at the most right
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(children: [
+                  BigText(
+                    text: "Bangladesh",
+                    color: AppColors.mainColor,
+                  ),
                   Row(
                     children: [
-                      SmallText(text: "Narsinqdi", color: Colors.black45,),
-                      Icon(Icons.arrow_drop_down_rounded)
+                      SmallText(
+                        text: "Narsinqdi",
+                        color: Colors.black45,
+                      ),
+                      const Icon(Icons.arrow_drop_down_rounded)
                     ],
                   )
                 ]),
@@ -56,8 +61,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
                     color: AppColors.mainColor
                   ),
                 ),
-              ),
-            ]),
+              ]),
         ),
           // Showing The Body
           Expanded(
