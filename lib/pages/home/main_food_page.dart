@@ -17,19 +17,15 @@ class _MainFoodPageState extends State<MainFoodPage> {
   @override
   Widget build(BuildContext context) {
     // to know dimension of the current screen
-    print("Current Height is "+MediaQuery.of(context).size.height.toString());
-    print("Current pageView is "+Dimensions.pageView.toString());
-    print("Current pageViewContainer is "+Dimensions.pageViewContainer.toString());
-    print("Current pageViewTextContainer is "+Dimensions.pageViewTextContainer.toString());
-    print("Current font is "+Dimensions.font20.toString());
     return Scaffold(
-      body: Column(
-        children: [
-          // Showing The Header
-          Container(
-            // Use EdgeInsets class for spaces
-            margin: EdgeInsets.only(top: Dimensions.height45,bottom: Dimensions.height15),
-            padding: EdgeInsets.only(right: Dimensions.width20,left: Dimensions.width20),
+      body: Column(children: [
+        // Showing The Header
+        Container(
+          // Use EdgeInsets class for spaces
+          margin: EdgeInsets.only(
+              top: Dimensions.height45, bottom: Dimensions.height15),
+          padding: EdgeInsets.only(
+              right: Dimensions.width20, left: Dimensions.width20),
           // Rows' default be verticaly centered
           child: Row(
               // "mainAxisAlignment" Create a space between row's children as much
@@ -55,21 +51,25 @@ class _MainFoodPageState extends State<MainFoodPage> {
                   child: Container(
                     width: Dimensions.width45,
                     height: Dimensions.height45,
-                    child: Icon(Icons.search,color: Colors.white,size: Dimensions.iconSize24,),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(Dimensions.raduis15),
-                      color: AppColors.mainColor
+                    child: Icon(
+                      Icons.search,
+                      color: Colors.white,
+                      size: Dimensions.iconSize24,
                     ),
+                    decoration: BoxDecoration(
+                        borderRadius:
+                            BorderRadius.circular(Dimensions.raduis15),
+                        color: AppColors.mainColor),
                   ),
                 ),
               ]),
         ),
-          // Showing The Body
-          Expanded(
-            child: SingleChildScrollView(
-              child: FoodPageBody(),
-            ),
+        // Showing The Body
+        const Expanded(
+          child: SingleChildScrollView(
+            child: FoodPageBody(),
           ),
+        ),
       ]),
     );
   }
