@@ -31,7 +31,7 @@ class AppColumn extends StatelessWidget {
               // List.generate => genrate a number of this icon dynamiclly ex.5
               children: List.generate(
                   5,
-                  (index) => Icon(
+                  (index) => const Icon(
                         Icons.star,
                         color: AppColors.mainColor,
                       )),
@@ -54,7 +54,7 @@ class AppColumn extends StatelessWidget {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
+          children: const [
             IconAndTextWidget(
                 icon: Icons.circle_sharp,
                 text: "Normal",

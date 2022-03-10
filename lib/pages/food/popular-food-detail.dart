@@ -74,7 +74,7 @@ class PopularFoodDetail extends StatelessWidget {
                   SizedBox(
                     height: Dimensions.height20,
                   ),
-                  Expanded(
+                  const Expanded(
                     child: SingleChildScrollView(
                       child: ExpandableTextWidget(
                           text:
@@ -114,7 +114,7 @@ class PopularFoodDetail extends StatelessWidget {
                   borderRadius: BorderRadius.circular(Dimensions.raduis20),
                   color: Colors.white),
               child: Row(children: [
-                Icon(
+                const Icon(
                   Icons.remove,
                   color: AppColors.signColor,
                 ),
@@ -127,7 +127,7 @@ class PopularFoodDetail extends StatelessWidget {
                 SizedBox(
                   width: Dimensions.width10 / 2,
                 ),
-                Icon(
+                const Icon(
                   Icons.add,
                   color: AppColors.signColor,
                 )
