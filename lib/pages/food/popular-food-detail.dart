@@ -1,8 +1,11 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:order/utils/colors.dart';
+import 'package:order/utils/dimensions.dart';
 import 'package:order/widgets/app_column.dart';
 import 'package:order/widgets/app_icon.dart';
+import 'package:order/widgets/big_text.dart';
 import 'package:order/widgets/expandable_text_widget.dart';
 
 class PopularFoodDetail extends StatelessWidget {
@@ -12,6 +15,7 @@ class PopularFoodDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           //backgroundImage
@@ -21,17 +25,18 @@ class PopularFoodDetail extends StatelessWidget {
             child: Container(
               width: double.infinity,
               //height:dimensions.screenHeight
-              height: 350,
+              height: Dimensions.popularFoodImgSize,
               decoration: const BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: AssetImage("assets/img-R1.jpeg"))),
+                      image: AssetImage("assets/image/food0.png"))),
             ),
           ),
           //icon widget
           Positioned(
-            left: 20,
-            right: 20,
+            top: Dimensions.height45,
+            left: Dimensions.width20,
+            right: Dimensions.width20,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
@@ -44,31 +49,38 @@ class PopularFoodDetail extends StatelessWidget {
           Positioned(
             left: 0,
             right: 0,
-            top: 350 - 15,
+            bottom: 0,
+            top: Dimensions.popularFoodImgSize - 20,
             child: Container(
-              padding:
-                  const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+              padding: EdgeInsets.only(
+                  left: Dimensions.width20,
+                  right: Dimensions.width20,
+                  top: Dimensions.height20),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20), color: Colors.white),
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(Dimensions.raduis20),
+                      topLeft: Radius.circular(Dimensions.raduis20)),
+                  color: Colors.white),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const AppColumn(
-                    text: "Biryani",
+                    text: "China Side",
                   ),
-                  Container(
-                    height: 30,
+                  SizedBox(
+                    height: Dimensions.height20,
                   ),
-                  const Text(
-                    "Introduce",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  BigText(text: "Introduce"),
+                  SizedBox(
+                    height: Dimensions.height20,
                   ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  const ExpandableTextWidget(
-                      text:
-                          "I remember biryani chawal often being ordered by my parents when we would go out for dinners or parcel the food for home. It was one rice dish that was always ordered. My parents would have the rice with some chicken curry and I would have the rice with palak paneer or dal makhani. Strange but a fact. This was always my favorite combination squeezed with some lemon juice on top.")
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: ExpandableTextWidget(
+                          text:
+                              "Chinese cuisine is an important part of Chinese culture and includes cuisines originating from China. Because of the Chinese diaspora and historical power of the country, Chinese cuisine has influenced many other cuisines in Asia and beyond, with modifications made to cater to local palates. Chinese food staples such as rice, soy sauce, noodles, tea, chili oil, and tofu, and utensils such as chopsticks and the wok, can now be found worldwide. The preferences for seasoning and cooking techniques of Chinese provinces depend on differences in historical background and ethnic groups. Geographic features including mountains, rivers, forests, and deserts also have a strong effect on the local available"),
+                    ),
+                  )
                 ],
               ),
             ),
@@ -76,55 +88,64 @@ class PopularFoodDetail extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: Container(
-        height: 95,
-        padding:
-            const EdgeInsets.only(top: 30, bottom: 30, left: 20, right: 20),
-        decoration: const BoxDecoration(
+        height: Dimensions.bottomHeightBar,
+        padding: EdgeInsets.only(
+            top: Dimensions.height20,
+            bottom: Dimensions.height20,
+            left: Dimensions.width20,
+            right: Dimensions.width20),
+        decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(15 * 2),
-              topRight: Radius.circular(15 * 2),
+              topLeft: Radius.circular(Dimensions.raduis20 * 2),
+              topRight: Radius.circular(Dimensions.raduis20 * 2),
             ),
-            color: Color.fromARGB(122, 177, 175, 175)),
+            color: AppColors.buttonBackgroundColor),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Container(
-              padding: const EdgeInsets.only(
-                  top: 10, left: 10, bottom: 10, right: 10),
+              padding: EdgeInsets.only(
+                  top: Dimensions.height20,
+                  left: Dimensions.width20,
+                  bottom: Dimensions.height20,
+                  right: Dimensions.width20),
               //height: 40,
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10), color: Colors.white),
-              child: Row(children: const [
+                  borderRadius: BorderRadius.circular(Dimensions.raduis20),
+                  color: Colors.white),
+              child: Row(children: [
                 Icon(
                   Icons.remove,
-                  color: Colors.black,
+                  color: AppColors.signColor,
                 ),
                 SizedBox(
-                  width: 20,
+                  width: Dimensions.width10 / 2,
                 ),
-                Text(
-                  "0",
-                  style: TextStyle(fontSize: 15),
+                BigText(
+                  text: "0",
                 ),
                 SizedBox(
-                  width: 20,
+                  width: Dimensions.width10 / 2,
                 ),
                 Icon(
                   Icons.add,
-                  color: Colors.black,
+                  color: AppColors.signColor,
                 )
               ]),
             ),
             Container(
-              padding: const EdgeInsets.only(
-                  top: 10, left: 10, bottom: 10, right: 10),
-              child: const Text(
-                "\$10 | Add to cart",
-                style: TextStyle(color: Colors.white),
+              padding: EdgeInsets.only(
+                  top: Dimensions.height20,
+                  bottom: Dimensions.height20,
+                  left: Dimensions.width20,
+                  right: Dimensions.width20),
+              child: BigText(
+                text: "\$10 | Add to cart",
+                color: Colors.white,
               ),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: const Color.fromARGB(255, 58, 187, 204)),
+                  borderRadius: BorderRadius.circular(Dimensions.raduis20),
+                  color: AppColors.mainColor),
             ),
           ],
         ),

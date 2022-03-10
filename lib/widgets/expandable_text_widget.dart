@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:order/utils/colors.dart';
+import 'package:order/utils/dimensions.dart';
+import 'package:order/widgets/small_text.dart';
 
 class ExpandableTextWidget extends StatefulWidget {
   final String text;
@@ -12,7 +15,7 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
   late String fristHalf;
   late String secondHalf;
   bool hiddenText = true;
-  double textHeight = 200;
+  double textHeight = Dimensions.screenHeight / 5.63;
   @override
   void initState() {
     super.initState();
@@ -30,12 +33,19 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
   Widget build(BuildContext context) {
     return Container(
       child: secondHalf.isEmpty
-          ? Text(fristHalf)
+          ? SmallText(
+              color: AppColors.paraColor,
+              size: Dimensions.font16,
+              text: fristHalf)
           : Column(
               children: [
-                Text(hiddenText
-                    ? (fristHalf + "....")
-                    : (fristHalf + secondHalf)),
+                SmallText(
+                    height: 1.8,
+                    color: AppColors.paraColor,
+                    size: Dimensions.font16,
+                    text: hiddenText
+                        ? (fristHalf + "....")
+                        : (fristHalf + secondHalf)),
                 InkWell(
                   onTap: () {
                     setState(() {
@@ -43,14 +53,13 @@ class _ExpandableTextWidgetState extends State<ExpandableTextWidget> {
                     });
                   },
                   child: Row(children: [
-                    const Text(
-                      "Show more",
-                      style:
-                          TextStyle(color: Color.fromARGB(255, 58, 187, 204)),
+                    SmallText(
+                      text: "Show more",
+                      color: AppColors.mainColor,
                     ),
                     Icon(
                       hiddenText ? Icons.arrow_drop_down : Icons.arrow_drop_up,
-                      color: const Color.fromARGB(255, 58, 187, 204),
+                      color: AppColors.mainColor,
                     ),
                   ]),
                 ),

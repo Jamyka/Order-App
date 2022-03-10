@@ -3,9 +3,11 @@
 import 'package:dots_indicator/dots_indicator.dart';
 // ignore_for_file: sized_box_for_whitespace
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:order/utils/colors.dart';
 import 'package:order/utils/dimensions.dart';
+import 'package:order/widgets/app_column.dart';
 import 'package:order/widgets/big_text.dart';
 import 'package:order/widgets/icon_and_text_widget.dart';
 import 'package:order/widgets/small_text.dart';
@@ -24,8 +26,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
   // Also we use page controller when we need to zoom,Scroll in and out
   PageController pageController = PageController(viewportFraction: 0.85);
   var _currPageValue = 0.0;
-  final double _scaleFactor = 0.8;
-  final double _height = Dimensions.pageViewContainer;
+  double _scaleFactor = 0.8;
+  double _height = Dimensions.pageViewContainer;
 
   @override
   void initState() {
@@ -45,7 +47,6 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   @override
   void dispose() {
-    super.dispose();
     pageController.dispose();
   }
 
@@ -66,7 +67,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         ),
 
         // Dots
-        DotsIndicator(
+        new DotsIndicator(
           dotsCount: 5,
           position: _currPageValue,
           decorator: DotsDecorator(
@@ -113,7 +114,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         // Listview expects size from it's parent container
         ListView.builder(
             // prevent the list view from being scrolling
-            physics: const NeverScrollableScrollPhysics(),
+            physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             itemCount: 10,
             // Every builder takes a function
@@ -137,7 +138,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                           borderRadius:
                               BorderRadius.circular(Dimensions.raduis20),
                           color: Colors.white,
-                          image: const DecorationImage(
+                          image: DecorationImage(
                             fit: BoxFit.cover,
                             image: AssetImage("assets/image/food0.png"),
                           )),
@@ -175,7 +176,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                 Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
-                                  children: const [
+                                  children: [
                                     IconAndTextWidget(
                                         icon: Icons.circle_sharp,
                                         text: "Normal",
@@ -206,7 +207,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     // Stack A widget that positions its children relative to the edges of its box.
     // we use it when we want to overlay some widgets
     // Scalling in flutter needs api "Matrix"
-    Matrix4 matrix = Matrix4.identity(); // instance has 3 coordinates x y z
+    Matrix4 matrix = new Matrix4.identity(); // instance has 3 coordinates x y z
     if (index == _currPageValue.floor()) {
       var currScale = 1 - (_currPageValue - index) * (1 - _scaleFactor); //1
       var currTrans = _height * (1 - currScale) / 2;
@@ -249,7 +250,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               color: index.isEven
                   ? const Color(0xFF69c5df)
                   : const Color(0xFF9294cc),
-              image: const DecorationImage(
+              image: DecorationImage(
                 fit: BoxFit.cover,
                 image: AssetImage("assets/image/food0.png"),
               ),
@@ -269,7 +270,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimensions.raduis20),
                   color: Colors.white,
-                  boxShadow: const [
+                  boxShadow: [
                     BoxShadow(
                         color: Color(0xFFe8e8e8),
                         blurRadius: 5.0,
@@ -278,63 +279,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     BoxShadow(color: Colors.white, offset: Offset(5, 0))
                   ]),
               child: Container(
-                padding: EdgeInsets.only(
-                    top: Dimensions.height15, left: 15, right: 15),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      BigText(text: "China Side"),
-                      SizedBox(
-                        height: Dimensions.height10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          // We use wrap widget to draw samething again and again
-                          Wrap(
-                            // List.generate => genrate a number of this icon dynamiclly ex.5
-                            children: List.generate(
-                                5,
-                                (index) => const Icon(
-                                      Icons.star,
-                                      color: AppColors.mainColor,
-                                    )),
-                          ),
-                          // SizedBox(width: 10,),
-                          SmallText(
-                            text: "4.5",
-                            color: AppColors.paraColor,
-                          ),
-                          // SizedBox(width: 10,),
-                          SmallText(
-                            text: "1287 Comments",
-                            color: AppColors.paraColor,
-                          ),
-                          // SizedBox(width: 5,),
-                        ],
-                      ),
-                      SizedBox(
-                        height: Dimensions.height20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          IconAndTextWidget(
-                              icon: Icons.circle_sharp,
-                              text: "Normal",
-                              iconColor: AppColors.iconColor1),
-                          IconAndTextWidget(
-                              icon: Icons.location_on,
-                              text: "1.7km",
-                              iconColor: AppColors.mainColor),
-                          IconAndTextWidget(
-                              icon: Icons.access_time_rounded,
-                              text: "32mins",
-                              iconColor: AppColors.iconColor2),
-                        ],
-                      )
-                    ]),
-              ),
+                  padding: EdgeInsets.only(
+                      top: Dimensions.height15, left: 15, right: 15),
+                  child: AppColumn(text: "China Side")),
             ),
           )
         ],
