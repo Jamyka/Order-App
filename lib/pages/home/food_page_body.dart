@@ -4,12 +4,17 @@ import 'package:dots_indicator/dots_indicator.dart';
 // ignore_for_file: sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import 'package:get/state_manager.dart';
+import 'package:order/controllers/popular_product_controller.dart';
+import 'package:order/models/products_model.dart';
+import 'package:order/utils/app_constants.dart';
 import 'package:order/utils/colors.dart';
 import 'package:order/utils/dimensions.dart';
 import 'package:order/widgets/app_column.dart';
 import 'package:order/widgets/big_text.dart';
 import 'package:order/widgets/icon_and_text_widget.dart';
 import 'package:order/widgets/small_text.dart';
+import 'package:get/get.dart';
 
 class FoodPageBody extends StatefulWidget {
   const FoodPageBody({Key? key}) : super(key: key);
@@ -19,7 +24,7 @@ class FoodPageBody extends StatefulWidget {
 }
 
 class _FoodPageBodyState extends State<FoodPageBody> {
-  // Page Congtroller lets you manipulate which page is visible in a PageView.
+  // Page Controller lets you manipulate which page is visible in a PageView.
   // ViewPortFraction is the property to determin that a page how much it will
   // fill from the viewport
   // Also we use page controller when we need to zoom,Scroll in and out
@@ -55,30 +60,41 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     return Column(
       children: [
         // Slider Section
-        Container(
-          height: Dimensions.pageView,
-          // "PageView.builder" a contructor to be able to swipe
-          child: PageView.builder(
-              controller: pageController,
-              itemCount: 5,
-              itemBuilder: (context, position) {
-                return _buildPageItem(position);
-              }),
-        ),
-
+        GetBuilder<PopularProductController>(builder: (popularProducts) {
+          return popularProducts.isLoaded
+              ? Container(
+                  height: Dimensions.pageView,
+                  // "PageView.builder" a contructor to be able to swipe
+                  child: PageView.builder(
+                      controller: pageController,
+                      itemCount: popularProducts.popularProductList.isEmpty
+                          ? 1
+                          : popularProducts.popularProductList.length,
+                      itemBuilder: (context, position) {
+                        return _buildPageItem(position,
+                            popularProducts.popularProductList[position]);
+                      }),
+                )
+              : const CircularProgressIndicator(
+                  color: AppColors.mainColor,
+                );
+        }),
         // Dots
-        DotsIndicator(
-          dotsCount: 5,
-          position: _currPageValue,
-          decorator: DotsDecorator(
-            activeColor: AppColors.mainColor,
-            size: const Size.square(9.0),
-            activeSize: const Size(18.0, 9.0),
-            activeShape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0)),
-          ),
-        ),
-
+        GetBuilder<PopularProductController>(builder: (popularProducts) {
+          return DotsIndicator(
+            dotsCount: popularProducts.popularProductList.isEmpty
+                ? 1
+                : popularProducts.popularProductList.length,
+            position: _currPageValue,
+            decorator: DotsDecorator(
+              activeColor: AppColors.mainColor,
+              size: const Size.square(9.0),
+              activeSize: const Size(18.0, 9.0),
+              activeShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0)),
+            ),
+          );
+        }),
         // Popular Text
         SizedBox(
           height: Dimensions.height30,
@@ -86,9 +102,10 @@ class _FoodPageBodyState extends State<FoodPageBody> {
         Container(
           margin: EdgeInsets.only(left: Dimensions.width30),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              BigText(text: "Popular"),
+              BigText(text: "Recommended", size: 20),
               SizedBox(
                 width: Dimensions.width10,
               ),
@@ -109,7 +126,9 @@ class _FoodPageBodyState extends State<FoodPageBody> {
             ],
           ),
         ),
-
+        SizedBox(
+          height: Dimensions.height20,
+        ),
         // List of food and images
         // Listview expects size from it's parent container
         ListView.builder(
@@ -203,7 +222,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
     );
   }
 
-  Widget _buildPageItem(int index) {
+  Widget _buildPageItem(int index, ProductModel popularProduct) {
     // Stack A widget that positions its children relative to the edges of its box.
     // we use it when we want to overlay some widgets
     // Scalling in flutter needs api "Matrix"
@@ -250,9 +269,10 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               color: index.isEven
                   ? const Color(0xFF69c5df)
                   : const Color(0xFF9294cc),
-              image: const DecorationImage(
+              image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage("assets/image/food0.png"),
+                image:
+                    NetworkImage(AppConstants.BASE_URL + popularProduct.img!),
               ),
             ),
           ),
@@ -262,7 +282,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               // if you put one container inside another container
               // the child container takes parents' container height
               // So the solution is to seprat parent and child with another widget "Stack Container"
-              height: Dimensions.pageViewTextContainer,
+              height: Dimensions.pageViewTextContainer + 15,
               margin: EdgeInsets.only(
                   left: Dimensions.width30,
                   right: Dimensions.width30,
@@ -281,7 +301,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               child: Container(
                   padding: EdgeInsets.only(
                       top: Dimensions.height15, left: 15, right: 15),
-                  child: const AppColumn(text: "China Side")),
+                  child: AppColumn(text: popularProduct.name!)),
             ),
           )
         ],
